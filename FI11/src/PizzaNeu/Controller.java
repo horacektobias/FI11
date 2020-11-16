@@ -9,6 +9,8 @@ import javax.swing.DefaultListModel;
 
 public class Controller 
 {
+	
+	// Änderung
 	private PizzaGUI gui;
 	private DefaultComboBoxModel<Pizza> listeTest = new DefaultComboBoxModel<>();
 	private DefaultComboBoxModel<Groesse> listeGroesse = new DefaultComboBoxModel<>();
