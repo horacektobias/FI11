@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Controller 
 {
@@ -27,10 +29,13 @@ public class Controller
 		gui.getComboBoxGroesse().setModel(listeGroesse);
 		gui.getComboBoxPizza().setModel(listeTest);
 		gui.getList().setModel(bestellung);
+		LeseDatei();
 		
+		/*
 		listeTest.addElement(new Pizza("Pizza Schinken",11.00));
 		listeTest.addElement(new Pizza("Pizza Salami",11.10));
 		listeTest.addElement(new Pizza("Pizza Margherita",9.10));
+		*/
 		listeGroesse.addElement(new Groesse("klein", 26,-1));
 		listeGroesse.addElement(new Groesse("groﬂ",32,1.80));
 		listeGroesse.addElement(new Groesse("Familie",48,4.30));
@@ -64,8 +69,31 @@ public class Controller
 		try
 		{
 			String zeile = null;
-			Bufferedreader in = new BufferedReader(new)
+			BufferedReader in = new BufferedReader(new FileReader("Pizzaliste.txt"));	
+			try
+			{
+				while ((zeile = in.readLine()) != null)
+				{
+					String[] values = zeile.split(";");
+					Pizza p = new Pizza(values[0],Double.parseDouble(values[1]));
+					listeTest.addElement(p);
+				}
+			}
+			catch(Exception IO)
+			{
+				
+			}
+			finally 
+			{
+				in.close();
+			}
+			
 		}
+		catch(Exception e)
+		{
+			
+		}
+		
 	}
 	
 	public void machwas(Pizza p, Groesse g)

@@ -1,0 +1,3 @@
+Schinken;10.10
+Salami;10.10
+Spezial;12.10
