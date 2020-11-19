@@ -25,7 +25,6 @@ public class Controller
 	private ActionListener entfernen;
 	private ActionListener drucken;
 	private double gesamtpreis = 0;
-	private int o=0;
 	
 	
 
@@ -120,7 +119,7 @@ public class Controller
 			try
 			{
 				out.write("Ihre Rechnung:\n\n");
-				for(int i=0;i<o;i++)
+				for(int i=0;i<bestellung.size();i++)
 				{
 					out.write(bestellung.getElementAt(i).toString()+"\n");
 				}
@@ -151,7 +150,6 @@ public class Controller
 			gesamtpreis = gesamtpreis + pizza.getGesamtpreis();
 			double roundOff = Math.round(gesamtpreis * 100.00) / 100.00;
 			gui.getTextPreis().setText(roundOff + "€");
-			o++;
 		}
 		catch(NumberFormatException nfe)
 		{
@@ -167,7 +165,6 @@ public class Controller
 			gesamtpreis = gesamtpreis - p.getGesamtpreis();
 			double roundOff = Math.round(gesamtpreis * 100.00) / 100.00;
 			gui.getTextPreis().setText(roundOff + "€");
-			o--;
 		}
 		catch(Exception e)
 		{
