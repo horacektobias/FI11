@@ -169,14 +169,14 @@ public class PizzaGUI extends JFrame {
 		}
 		return textPreis;
 	}
-	private JButton getBtnDrucken() {
+	public JButton getBtnDrucken() {
 		if (btnDrucken == null) {
 			btnDrucken = new JButton("Drucken");
 			btnDrucken.setBounds(267, 288, 101, 23);
 		}
 		return btnDrucken;
 	}
-	private JButton getBtnNewButton() {
+	public JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("Hardcopy");
 			btnNewButton.setBounds(374, 288, 109, 23);

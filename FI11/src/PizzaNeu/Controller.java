@@ -7,7 +7,11 @@ import java.util.Optional;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Controller 
 {
@@ -19,7 +23,10 @@ public class Controller
 	private DefaultListModel<Bestellung> bestellung = new DefaultListModel<>();
 	private ActionListener hinzu;
 	private ActionListener entfernen;
+	private ActionListener drucken;
 	private double gesamtpreis = 0;
+	private int o=0;
+	
 	
 
 	
@@ -63,6 +70,16 @@ public class Controller
 			
 		};
 		gui.getBtnEntfernen().addActionListener(entfernen);
+		
+		drucken = new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				SchreibeDatei();
+			}
+		};
+		gui.getBtnDrucken().addActionListener(drucken);
+		
 	}
 	public void LeseDatei()
 	{
@@ -95,6 +112,35 @@ public class Controller
 		}
 		
 	}
+	public void SchreibeDatei()
+	{
+		try
+		{
+			BufferedWriter out = new BufferedWriter(new FileWriter("Rechnung.txt",false));
+			try
+			{
+				out.write("Ihre Rechnung:\n\n");
+				for(int i=0;i<o;i++)
+				{
+					out.write(bestellung.getElementAt(i).toString()+"\n");
+				}
+				out.write("\n");
+				out.write("Ihr Gesamtpreis"+" "+String.format("%.2f", gesamtpreis)+"€");
+			}
+			catch(IOException ex)
+			{
+				
+			}
+			finally
+			{
+				out.close();
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
 	
 	public void machwas(Pizza p, Groesse g)
 	{	
@@ -105,6 +151,7 @@ public class Controller
 			gesamtpreis = gesamtpreis + pizza.getGesamtpreis();
 			double roundOff = Math.round(gesamtpreis * 100.00) / 100.00;
 			gui.getTextPreis().setText(roundOff + "€");
+			o++;
 		}
 		catch(NumberFormatException nfe)
 		{
@@ -120,6 +167,7 @@ public class Controller
 			gesamtpreis = gesamtpreis - p.getGesamtpreis();
 			double roundOff = Math.round(gesamtpreis * 100.00) / 100.00;
 			gui.getTextPreis().setText(roundOff + "€");
+			o--;
 		}
 		catch(Exception e)
 		{
