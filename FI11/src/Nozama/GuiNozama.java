@@ -34,7 +34,7 @@ public class GuiNozama
 	private JList listArtikel_1;
 	private JTextField textKundenname;
 	private JLabel lblNewLabel;
-	private JButton btnNewButton;
+	private JButton btnBestellung;
 
 	/**
 	 * Create the application.
@@ -60,7 +60,7 @@ public class GuiNozama
 		frame.getContentPane().add(getListArtikel_1());
 		frame.getContentPane().add(getTextKundenname());
 		frame.getContentPane().add(getLblNewLabel());
-		frame.getContentPane().add(getBtnNewButton());
+		frame.getContentPane().add(getBtnBestellung());
 		frame.setVisible(true);
 	}
 	private JLabel getLblWarenkorb() {
@@ -98,7 +98,7 @@ public class GuiNozama
 		}
 		return listArtikel_1;
 	}
-	private JTextField getTextKundenname() {
+	public JTextField getTextKundenname() {
 		if (textKundenname == null) {
 			textKundenname = new JTextField();
 			textKundenname.setBounds(120, 221, 156, 20);
@@ -113,11 +113,11 @@ public class GuiNozama
 		}
 		return lblNewLabel;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("Bestellung abschicken");
-			btnNewButton.setBounds(286, 221, 138, 23);
+	public JButton getBtnBestellung() {
+		if (btnBestellung == null) {
+			btnBestellung = new JButton("Bestellung abschicken");
+			btnBestellung.setBounds(286, 221, 138, 23);
 		}
-		return btnNewButton;
+		return btnBestellung;
 	}
 }

@@ -6,6 +6,10 @@ public class Artikel
 	private String bezeichnung;
 	private double preis;
 	
+	public Artikel()
+	{
+		
+	}
 	public Artikel(String artikelnr, String bezeichnung, double preis)
 	{
 		this.artikelnr = artikelnr;
@@ -44,7 +48,7 @@ public class Artikel
 	}
 	public String toString()
 	{
-		return bezeichnung + " " + preis;
+		return bezeichnung + " " + preis +"€";
 	}
 	
 }
