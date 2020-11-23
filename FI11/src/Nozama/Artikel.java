@@ -42,6 +42,9 @@ public class Artikel
 	{
 		this.preis = preis;
 	}
-	
+	public String toString()
+	{
+		return bezeichnung + " " + preis;
+	}
 	
 }

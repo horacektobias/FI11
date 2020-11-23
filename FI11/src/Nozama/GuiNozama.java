@@ -2,11 +2,26 @@ package Nozama;
 
 import java.awt.EventQueue;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JScrollBar;
 
 public class GuiNozama
 {
@@ -20,27 +35,6 @@ public class GuiNozama
 	private JTextField textKundenname;
 	private JLabel lblNewLabel;
 	private JButton btnNewButton;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					GuiNozama window = new GuiNozama();
-					window.frame.setVisible(true);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -67,6 +61,7 @@ public class GuiNozama
 		frame.getContentPane().add(getTextKundenname());
 		frame.getContentPane().add(getLblNewLabel());
 		frame.getContentPane().add(getBtnNewButton());
+		frame.setVisible(true);
 	}
 	private JLabel getLblWarenkorb() {
 		if (lblWarenkorb == null) {
@@ -75,28 +70,28 @@ public class GuiNozama
 		}
 		return lblWarenkorb;
 	}
-	private JList getListArtikel() {
+	public JList getListArtikel() {
 		if (listArtikel == null) {
 			listArtikel = new JList();
 			listArtikel.setBounds(39, 79, 138, 131);
 		}
 		return listArtikel;
 	}
-	private JButton getBtnWarenHinzu() {
+	public JButton getBtnWarenHinzu() {
 		if (btnWarenHinzu == null) {
 			btnWarenHinzu = new JButton(">");
 			btnWarenHinzu.setBounds(187, 98, 89, 23);
 		}
 		return btnWarenHinzu;
 	}
-	private JButton getBtnWarenWeg() {
+	public JButton getBtnWarenWeg() {
 		if (btnWarenWeg == null) {
 			btnWarenWeg = new JButton("<");
 			btnWarenWeg.setBounds(187, 148, 89, 23);
 		}
 		return btnWarenWeg;
 	}
-	private JList getListArtikel_1() {
+	public JList getListArtikel_1() {
 		if (listArtikel_1 == null) {
 			listArtikel_1 = new JList();
 			listArtikel_1.setBounds(286, 79, 138, 131);
