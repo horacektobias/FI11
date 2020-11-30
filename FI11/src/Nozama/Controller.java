@@ -7,11 +7,13 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 
 import PizzaNeu.Bestellung;
 import PizzaNeu.Groesse;
@@ -23,6 +25,8 @@ public class Controller
 	private DefaultListModel<Artikel> artikelListe = new DefaultListModel<>();
 	private DefaultListModel<Artikel> warenListe = new DefaultListModel<>();
 	private double gesamtpreis = 0;
+	private String filePfad;
+	private String fileLesen = LadeDaten();
 	
 	public Controller()
 	{
@@ -32,6 +36,7 @@ public class Controller
 		ActionListener hinzu;
 		ActionListener wegnehmen;
 		ActionListener drucken;
+		
 		LeseDatei();
 		
 		hinzu = new ActionListener() 
@@ -40,10 +45,13 @@ public class Controller
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
+				/*
 				warenListe.addElement((Artikel)gui.getListArtikel().getSelectedValue());
 				Artikel a = (Artikel)gui.getListArtikel().getSelectedValue();
 				artikelListe.removeElement((Artikel)gui.getListArtikel().getSelectedValue());
 				gesamtpreis = gesamtpreis + a.getPreis();
+				*/
+				Wechsel();
 			}
 			
 		};
@@ -68,7 +76,8 @@ public class Controller
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				SchreibeDatei();
+				filePfad = ZeigeDaten();
+				SchreibeDatei(filePfad);
 			}
 		};
 		gui.getBtnBestellung().addActionListener(drucken);
@@ -81,7 +90,7 @@ public class Controller
 		try
 		{
 			String zeile = null;
-			BufferedReader in = Files.newBufferedReader(Paths.get("ArtikelListe.txt"));	
+			BufferedReader in = Files.newBufferedReader(Paths.get(fileLesen));	
 			try
 			{
 				while ((zeile = in.readLine()) != null)
@@ -108,11 +117,11 @@ public class Controller
 		
 	}
 	
-	public void SchreibeDatei()
+	public void SchreibeDatei(String pfad)
 	{
 		try
 		{
-			BufferedWriter out = Files.newBufferedWriter(Paths.get("RechnungWarenkorb.txt"));
+			BufferedWriter out = Files.newBufferedWriter(Paths.get(pfad), StandardCharsets.UTF_8);
 			try
 			{
 				out.write("Ihre Rechnung:\n\n");
@@ -138,4 +147,32 @@ public class Controller
 			
 		}
 	}
+	public void Wechsel()
+	{
+		warenListe.addElement((Artikel)gui.getListArtikel().getSelectedValue());
+		Artikel a = (Artikel)gui.getListArtikel().getSelectedValue();
+		artikelListe.removeElement((Artikel)gui.getListArtikel().getSelectedValue());
+		gesamtpreis = gesamtpreis + a.getPreis();
+	}
+	public String ZeigeDaten()
+	{
+		String test;
+		
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(null);
+		test = chooser.getSelectedFile().toString();
+		
+		return test;
+	}
+	public String LadeDaten()
+	{
+		String test;
+		
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(null);
+		test = chooser.getSelectedFile().getAbsolutePath().toString();
+		
+		return test;
+	}
+	
 }
