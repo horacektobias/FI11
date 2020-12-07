@@ -22,6 +22,7 @@ import PizzaNeu.Pizza;
 public class Controller
 {
 	private GuiNozama gui; 
+	private DateiHandler dh = new DHNIO();
 	private DefaultListModel<Artikel> artikelListe = new DefaultListModel<>();
 	private DefaultListModel<Artikel> warenListe = new DefaultListModel<>();
 	private double gesamtpreis = 0;
@@ -37,7 +38,14 @@ public class Controller
 		ActionListener wegnehmen;
 		ActionListener drucken;
 		
-		LeseDatei();
+		try
+		{
+			artikelListe = dh.lesen(fileLesen);
+			System.out.println(artikelListe.getElementAt(1));
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
 		
 		hinzu = new ActionListener() 
 		{
@@ -77,14 +85,14 @@ public class Controller
 			public void actionPerformed(ActionEvent e)
 			{
 				filePfad = ZeigeDaten();
-				SchreibeDatei(filePfad);
+				dh.schreiben(filePfad,warenListe);
 			}
 		};
 		gui.getBtnBestellung().addActionListener(drucken);
 	}
 
 	
-	
+	/*
 	public void LeseDatei()
 	{
 		try
@@ -147,6 +155,7 @@ public class Controller
 			
 		}
 	}
+	*/
 	public void Wechsel()
 	{
 		warenListe.addElement((Artikel)gui.getListArtikel().getSelectedValue());
@@ -154,6 +163,18 @@ public class Controller
 		artikelListe.removeElement((Artikel)gui.getListArtikel().getSelectedValue());
 		gesamtpreis = gesamtpreis + a.getPreis();
 	}
+	public double getGesamtpreis()
+	{
+		return gesamtpreis;
+	}
+
+
+	public void setGesamtpreis(double gesamtpreis)
+	{
+		this.gesamtpreis = gesamtpreis;
+	}
+
+
 	public String ZeigeDaten()
 	{
 		String test;

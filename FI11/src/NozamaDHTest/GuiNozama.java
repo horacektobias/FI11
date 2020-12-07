@@ -25,7 +25,6 @@ import javax.swing.JScrollBar;
 
 public class GuiNozama
 {
-
 	private JFrame frame;
 	private JLabel lblWarenkorb;
 	private JList listArtikel;

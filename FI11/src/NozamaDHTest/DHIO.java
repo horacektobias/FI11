@@ -1,10 +1,17 @@
 package NozamaDHTest;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 
 public class DHIO extends DateiHandler
 {
@@ -14,7 +21,7 @@ public class DHIO extends DateiHandler
 	}
 
 	@Override
-	public ArrayList<String> lesen(String datei)
+	public DefaultListModel<Artikel> lesen(String datei)
 	{
 		try
 		{
@@ -25,28 +32,36 @@ public class DHIO extends DateiHandler
 			e1.printStackTrace();
 		}
 		
-		ArrayList<String> al = null;
-		
-		try
-		{
-			al = super.lesenDatei();
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		DefaultListModel<Artikel> al = new DefaultListModel<>();
+		al = super.lesenDatei();
 		return al;
-		
-		
-
-		
 	}
 
 	@Override
-	public void schreiben(String datei)
+	public void schreiben(String datei, DefaultListModel<Artikel> waren)
 	{
-		// TODO Auto-generated method stub
-		
-	}
-	
+		try
+		{
+			BufferedWriter out = new BufferedWriter (new FileWriter(datei));
+			try
+			{	
+				for(int i=0;i<listListe.size();i++)
+				{
+					out.write("Test");
+				}
+			}
+			catch(IOException ex)
+			{
+				
+			}
+			finally
+			{
+				out.close();
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}	
+	}	
 }
