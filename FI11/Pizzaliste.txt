@@ -2,3 +2,4 @@ Schinken;10.10
 Pollo;8,50
 Salami;10.10
 Spezial;12.10
+Test;12.10
